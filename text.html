@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaaJanki Web Tech - Portfolio Preview</title>
+  <meta name="description" content="MaaJanki Web Tech transforms Digital Product with sleek, user-friendly web design.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      line-height: 1.6; 
+      padding-top: 140px; /* Space for fixed navbar */
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* === Top Bar === */
+    #header-top-bar {
+      background: linear-gradient(75deg, #65258a, #e80566);
+      color: #fff;
+      padding: 12px 0;
+      width: 100%;
+      margin: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .top-bar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .social-icons a {
+      color: #fff;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact-info a {
+      color: #fff;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-info a:hover {
+      color: #eee;
+      transform: translateY(-2px);
+    }
+
+    /* === Navbar === */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      position: fixed;
+      top: 60px; /* Position below the top bar */
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      width: 100%;
+      margin: 0;
+    }
+
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 80px;
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      width: auto;
+    }
+
+    .navbar-toggler {
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #65258a;
+      display: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* === Main Menu === */
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li a {
+      padding: 25px 22px;
+      color: #333;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .menu li a:hover {
+      color: #e80566;
+      background: rgba(232, 5, 102, 0.05);
+    }
+
+    .menu li a i {
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .menu li:hover a i {
+      transform: rotate(180deg);
+    }
+
+    /* === Mega Menu === */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vh;
+      margin-left: calc(-50vw + 50%);
+      background: #fff;
+      padding: 40px 0;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      z-index: 999;
+      border-bottom: 3px solid #e80566;
+    }
+
+    .has-mega-menu:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mega-menu-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .mega-item {
+      background: #fff;
+    }
+
+    .mega-item h4 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: 700;
+      padding-bottom: 18px;
+      border-bottom: 2px solid #f0f0f0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mega-item ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .mega-item ul li {
+      margin-bottom: 10px;
+      padding: 0;
+    }
+
+    .mega-item ul li a {
+      font-size: 14px;
+      color: #666;
+      transition: all 0.3s ease;
+      padding: 10px 0;
+      display: block;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .mega-item ul li a:hover {
+      color: #e80566;
+      padding-left: 18px;
+    }
+
+    .mega-item ul li a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 2px;
+      background: #e80566;
+      transition: width 0.3s ease;
+    }
+
+    .mega-item ul li a:hover::before {
+      width: 12px;
+    }
+
+    /* === Responsive Design === */
+
+    @media (max-width: 1024px) {
+      .mega-menu-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+      }
+      
+      .menu li a {
+        padding: 25px 18px;
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbar-toggler {
+        display: block;
+      }
+
+      .menu {
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 25px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+
+      .navbar-toggler:focus + .menu,
+      .menu:hover {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .menu li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .menu li:last-child {
+        border-bottom: none;
+      }
+
+      .menu li a {
+        padding: 18px 25px;
+        justify-content: space-between;
+      }
+
+      .mega-menu {
+        position: static;
+        width: 100%;
+        margin-left: 0;
+        box-shadow: none;
+        background: #f8f9fa;
+        padding: 25px 0;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        transform: none;
+        border-bottom: none;
+        border-top: 1px solid #ddd;
+      }
+
+      .has-mega-menu:hover .mega-menu {
+        display: block;
+      }
+
+      .mega-menu-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 25px;
+      }
+
+      .mega-item h4 {
+        font-size: 20px;
+        margin-bottom: 25px;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+
+      .mega-item ul li {
+        margin-bottom: 12px;
+      }
+
+      .mega-item ul li a {
+        font-size: 15px;
+        padding: 8px 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 150px; /* Adjust for smaller screens */
+      }
+      
+      .navbar {
+        top: 90px; /* Adjust navbar position for mobile */
+      }
+      
+      .top-bar-container {
+        padding: 0 15px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .navbar-container {
+        padding: 15px;
+        min-height: 70px;
+      }
+
+      .navbar-brand img {
+        height: 40px;
+      }
+
+      .contact-info {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .contact-info a {
+        font-size: 13px;
+      }
+
+      .social-icons {
+        gap: 12px;
+      }
+
+      .social-icons a {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .contact-info {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .menu li a {
+        font-size: 14px;
+      }
+    }
+
+    /* === Pure CSS Mobile Menu Toggle === */
+    .menu:hover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- === Top Bar === -->
+<div id="header-top-bar">
+  <div class="top-bar-container">
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+    </div>
+    <div class="contact-info">
+      <a href="mailto:info@maajanki.com"><i class="fas fa-envelope"></i> info@maajanki.com</a>
+      <a href="tel:8834565123456"><i class="fas fa-phone-alt"></i> 883-4565-123456</a>
+    </div>
+  </div>
+</div>
+
+<!-- === Navbar === -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <a class="navbar-brand" href="#"><img src="https://via.placeholder.com/180x45/65258a/ffffff?text=OURANOS+DIGITAL" alt="Ouranos Digital"></a>
+    <button class="navbar-toggler" id="menu-toggle"><i class="fas fa-bars"></i></button>
+    <ul class="menu" id="main-menu">
+      <li><a href="#">HOME</a></li>
+      <li><a href="#about">ABOUT US</a></li>
+      <li class="has-mega-menu">
+        <a href="#services">SERVICES <i class="fas fa-chevron-down"></i></a>
+        <div class="mega-menu">
+          <div class="mega-menu-wrapper">
+            <div class="mega-item">
+              <h4>IT solutions</h4>
+              <ul>
+                <li><a href="#app-support">Application Support Services</a></li>
+                <li><a href="#it-consulting">IT Consulting Services</a></li>
+                <li><a href="#web-dev">Web Application Development</a></li>
+                <li><a href="#website-dev">Website Development</a></li>
+                <li><a href="#mobile-app">Mobile App Development</a></li>
+                <li><a href="#web-maintenance">Web Maintenance And Hosting</a></li>
+              </ul>
+            </div>
+            <div class="mega-item">
+              <h4>Digital Marketing</h4>
+              <ul>
+                <li><a href="#branding">Branding Services</a></li>
+                <li><a href="#seo">Search Engine Optimization (SEO)</a></li>
+                <li><a href="#sem">Search Engine Marketing (SEM)</a></li>
+                <li><a href="#smo">Social Media Optimization (SMO)</a></li>
+                <li><a href="#smm">Social Media Marketing (SMM)</a></li>
+                <li><a href="#brochures">Brochures, Flyers And Leaflets</a></li>
+              </ul>
+            </div>
+            <div class="mega-item">
+              <h4>Offline Marketing</h4>
+              <ul>
+                <li><a href="#billboard">Billboard Ads</a></li>
+                <li><a href="#print-design">Print Design Services</a></li>
+                <li><a href="#analysis">Digital Competitive Analysis</a></li>
+                <li><a href="#email-marketing">Email Marketing Campaigns</a></li>
+                <li><a href="#conversion">Conversion Rate Optimization</a></li>
+                <li><a href="#strategic">Strategic Analytics Consulting</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="#industry">INDUSTRIES</a></li>
+      <li><a href="#careers">CAREERS</a></li>
+      <li><a href="#contact">CONTACT US</a></li>
+    </ul>
+  </div>
+</nav>
+  <!-- Navbar End -->
+
+  
+
+</body>
+</html>
